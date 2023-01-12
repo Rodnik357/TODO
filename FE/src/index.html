@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>TODO app</title>
+    <script defer src="./index.js"></script>
+    <link rel="stylesheet" href="./styles.css" />
+  </head>
+  <body onload="init()">
+    <h1>Todo app</h1>
+    <div>
+      <button
+        id="createNewTask"
+        data-testid="createNewTask"
+        onclick="expandAddNewTask(event)"
+      >
+        Dodaj novi task
+      </button>
+      <form onsubmit="addNewTask(event)" data-testid="addTaskForm" class="hide">
+        <label for="taskName">Unesite naziv taska:</label><br />
+        <input type="text" id="taskName" name="taskName" /><br /><br />
+
+        <label for="taskDescription">Unesite opis taska:</label><br />
+        <input
+          type="text"
+          id="taskDescription"
+          name="taskDescription"
+        /><br /><br />
+
+        <input type="reset" value="Odustani" onclick="addNewTask(event)" />
+        <input type="submit" name="radnja" value="Stvori task" />
+      </form>
+    </div>
+    <h3>Vaši trenutni taskovi</h3>
+    <div id="myTasks" data-testid="myTasks"></div>
+  </body>
+</html>
