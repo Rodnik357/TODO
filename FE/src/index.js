@@ -11,12 +11,29 @@ const addNewTask = async (event) => {
     return 0;
     }
     event.preventDefault();
+
+    let name = document.getElementById("taskName").value;
+    let description = document.getElementById("taskDescription").value; 
+
+    const zahtjev = await fetch("http://127.0.0.1:3000/", {
+        method:"POST", 
+        headers: {
+            "Content-Type": "application/json",
+            // "Content-Type": "application/x-www-form-urlencoded",
+        },
+        body: JSON.stringify({name: name, description: description}),
+    });
+    const data = await zahtjev.json();
+    
+    showTasks(data.data);
+
+    event.target.reset();
+    event.target.classList.toggle("hide");
+    event.target.previousElementSibling.classList.toggle("hide");
 };
 
 const showTasks = (tasks)=>{
     const myTasks = document.getElementById("myTasks")
-
-    console.log(tasks);
 
     let newHTML = "<ul>";
     tasks.forEach((task)=>{
@@ -28,7 +45,7 @@ const showTasks = (tasks)=>{
     myTasks.innerHTML = newHTML;
 };
 
-const init = async() =>{
+const init = async() =>{ 
     const response = await fetch("http://127.0.0.1:3000/");
     const data = await response.json();
 
